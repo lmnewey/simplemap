@@ -1,0 +1,178 @@
+[0.000000] (-) TimerEvent: {}
+[0.000707] (simplemap) JobQueued: {'identifier': 'simplemap', 'dependencies': OrderedDict()}
+[0.001027] (simplemap) JobStarted: {'identifier': 'simplemap'}
+[0.092107] (simplemap) JobProgress: {'identifier': 'simplemap', 'progress': 'cmake'}
+[0.093364] (simplemap) JobProgress: {'identifier': 'simplemap', 'progress': 'build'}
+[0.094622] (simplemap) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/luke/tmp/simplemap/build/simplemap', '--', '-j12', '-l12'], 'cwd': '/home/luke/tmp/simplemap/build/simplemap', 'env': OrderedDict([('USER', 'luke'), ('GIT_ASKPASS', '/home/luke/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('WT_PROFILE_ID', '{51855cb2-8cce-5362-8f54-464b92b32386}'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/luke'), ('TERM_PROGRAM_VERSION', '1.85.1'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-c6c63665-d0f5-4158-ab4a-6a93a2313b13.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/luke/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/luke/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/node'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WSL_DISTRO_NAME', 'Ubuntu'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'luke'), ('NAME', 'Code'), ('WSL_INTEROP', '/run/WSL/21257_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/luke/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/bin/remote-cli:/home/luke/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2/bin:/mnt/c/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2/libnvvp:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2023.2.2/:/mnt/c/Users/lmnew/.cargo/bin:/mnt/c/Users/lmnew/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/lmnew/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Espressif/tools/xtensa-esp32-elf-clang/esp-14.0.0-20220415-x86_64-pc-windows-msvc/bin/:/mnt/c/Users/lmnew/AppData/Local/Programs/jaguar:/mnt/c/Users/lmnew/.dotnet/tools:/snap/bin'), ('WT_SESSION', '3347ec39-a4d2-4b9c-b1f9-c4b65e629808'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-5e47345b95.sock'), ('TERM_PROGRAM', 'vscode'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/luke/tmp/simplemap/build/simplemap'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', 'ELECTRON_RUN_AS_NODE/w:WT_SESSION:WT_PROFILE_ID:'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.099639] (-) TimerEvent: {}
+[0.128872] (simplemap) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.7 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.199807] (-) TimerEvent: {}
+[0.300255] (-) TimerEvent: {}
+[0.317453] (simplemap) StdoutLine: {'line': b'-- Found rclcpp: 16.0.8 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.400438] (-) TimerEvent: {}
+[0.500894] (-) TimerEvent: {}
+[0.601367] (-) TimerEvent: {}
+[0.676651] (simplemap) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.683921] (simplemap) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.700006] (simplemap) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.701557] (-) TimerEvent: {}
+[0.727730] (simplemap) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.760588] (simplemap) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.801773] (-) TimerEvent: {}
+[0.874756] (simplemap) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.879108] (simplemap) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.6 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.901962] (-) TimerEvent: {}
+[1.002436] (-) TimerEvent: {}
+[1.102863] (-) TimerEvent: {}
+[1.203317] (-) TimerEvent: {}
+[1.303766] (-) TimerEvent: {}
+[1.404230] (-) TimerEvent: {}
+[1.504669] (-) TimerEvent: {}
+[1.605530] (-) TimerEvent: {}
+[1.705940] (-) TimerEvent: {}
+[1.806383] (-) TimerEvent: {}
+[1.906839] (-) TimerEvent: {}
+[2.007317] (-) TimerEvent: {}
+[2.107780] (-) TimerEvent: {}
+[2.208251] (-) TimerEvent: {}
+[2.308782] (-) TimerEvent: {}
+[2.409202] (-) TimerEvent: {}
+[2.509764] (-) TimerEvent: {}
+[2.610235] (-) TimerEvent: {}
+[2.710677] (-) TimerEvent: {}
+[2.811095] (-) TimerEvent: {}
+[2.911579] (-) TimerEvent: {}
+[3.012076] (-) TimerEvent: {}
+[3.112555] (-) TimerEvent: {}
+[3.212993] (-) TimerEvent: {}
+[3.313483] (-) TimerEvent: {}
+[3.414018] (-) TimerEvent: {}
+[3.514606] (-) TimerEvent: {}
+[3.594630] (simplemap) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[3.614771] (-) TimerEvent: {}
+[3.715318] (-) TimerEvent: {}
+[3.815742] (-) TimerEvent: {}
+[3.916196] (-) TimerEvent: {}
+[4.016638] (-) TimerEvent: {}
+[4.117106] (-) TimerEvent: {}
+[4.217607] (-) TimerEvent: {}
+[4.318062] (-) TimerEvent: {}
+[4.418529] (-) TimerEvent: {}
+[4.519035] (-) TimerEvent: {}
+[4.619468] (-) TimerEvent: {}
+[4.719972] (-) TimerEvent: {}
+[4.820486] (-) TimerEvent: {}
+[4.920941] (-) TimerEvent: {}
+[5.021385] (-) TimerEvent: {}
+[5.121855] (-) TimerEvent: {}
+[5.222762] (-) TimerEvent: {}
+[5.323212] (-) TimerEvent: {}
+[5.423679] (-) TimerEvent: {}
+[5.524099] (-) TimerEvent: {}
+[5.624558] (-) TimerEvent: {}
+[5.725017] (-) TimerEvent: {}
+[5.825564] (-) TimerEvent: {}
+[5.926020] (-) TimerEvent: {}
+[6.026511] (-) TimerEvent: {}
+[6.078411] (simplemap) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[6.126688] (-) TimerEvent: {}
+[6.227162] (-) TimerEvent: {}
+[6.327637] (-) TimerEvent: {}
+[6.428107] (-) TimerEvent: {}
+[6.528538] (-) TimerEvent: {}
+[6.629039] (-) TimerEvent: {}
+[6.729540] (-) TimerEvent: {}
+[6.829989] (-) TimerEvent: {}
+[6.930503] (-) TimerEvent: {}
+[7.030989] (-) TimerEvent: {}
+[7.131393] (-) TimerEvent: {}
+[7.231783] (-) TimerEvent: {}
+[7.332240] (-) TimerEvent: {}
+[7.432718] (-) TimerEvent: {}
+[7.533183] (-) TimerEvent: {}
+[7.633694] (-) TimerEvent: {}
+[7.734099] (-) TimerEvent: {}
+[7.834630] (-) TimerEvent: {}
+[7.935085] (-) TimerEvent: {}
+[8.035545] (-) TimerEvent: {}
+[8.135993] (-) TimerEvent: {}
+[8.236404] (-) TimerEvent: {}
+[8.336858] (-) TimerEvent: {}
+[8.437299] (-) TimerEvent: {}
+[8.537795] (-) TimerEvent: {}
+[8.638236] (-) TimerEvent: {}
+[8.738697] (-) TimerEvent: {}
+[8.839203] (-) TimerEvent: {}
+[8.939951] (-) TimerEvent: {}
+[9.040482] (-) TimerEvent: {}
+[9.140916] (-) TimerEvent: {}
+[9.241373] (-) TimerEvent: {}
+[9.341796] (-) TimerEvent: {}
+[9.442205] (-) TimerEvent: {}
+[9.542656] (-) TimerEvent: {}
+[9.643076] (-) TimerEvent: {}
+[9.743530] (-) TimerEvent: {}
+[9.843942] (-) TimerEvent: {}
+[9.944411] (-) TimerEvent: {}
+[10.044860] (-) TimerEvent: {}
+[10.145334] (-) TimerEvent: {}
+[10.245824] (-) TimerEvent: {}
+[10.346314] (-) TimerEvent: {}
+[10.446783] (-) TimerEvent: {}
+[10.547242] (-) TimerEvent: {}
+[10.647731] (-) TimerEvent: {}
+[10.748181] (-) TimerEvent: {}
+[10.848728] (-) TimerEvent: {}
+[10.949330] (-) TimerEvent: {}
+[11.049789] (-) TimerEvent: {}
+[11.150250] (-) TimerEvent: {}
+[11.250654] (-) TimerEvent: {}
+[11.270938] (simplemap) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[11.291826] (simplemap) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[11.350823] (-) TimerEvent: {}
+[11.451344] (-) TimerEvent: {}
+[11.551891] (-) TimerEvent: {}
+[11.615919] (simplemap) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[11.616379] (simplemap) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[11.652036] (-) TimerEvent: {}
+[11.752465] (-) TimerEvent: {}
+[11.852957] (-) TimerEvent: {}
+[11.866743] (simplemap) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[11.868326] (simplemap) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[11.953169] (-) TimerEvent: {}
+[12.053590] (-) TimerEvent: {}
+[12.119748] (simplemap) StdoutLine: {'line': b'-- Found nav_msgs: 4.2.3 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[12.153760] (-) TimerEvent: {}
+[12.254223] (-) TimerEvent: {}
+[12.320503] (simplemap) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.10 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[12.354403] (-) TimerEvent: {}
+[12.427484] (simplemap) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[12.427999] (simplemap) StdoutLine: {'line': b'-- Configured cppcheck include dirs: \n'}
+[12.428167] (simplemap) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[12.429980] (simplemap) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[12.434664] (simplemap) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[12.436925] (simplemap) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[12.452899] (simplemap) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[12.453229] (simplemap) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[12.454568] (-) TimerEvent: {}
+[12.455288] (simplemap) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[12.456261] (simplemap) StdoutLine: {'line': b'-- Configuring done\n'}
+[12.460535] (simplemap) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:18 (add_executable):\n'}
+[12.460751] (simplemap) StderrLine: {'line': b'  Cannot find source file:\n'}
+[12.460840] (simplemap) StderrLine: {'line': b'\n'}
+[12.460917] (simplemap) StderrLine: {'line': b'    src/simple_map_node.cpp\n'}
+[12.460991] (simplemap) StderrLine: {'line': b'\n'}
+[12.461064] (simplemap) StderrLine: {'line': b'  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h\n'}
+[12.461138] (simplemap) StderrLine: {'line': b'  .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc\n'}
+[12.461210] (simplemap) StderrLine: {'line': b'\n'}
+[12.461281] (simplemap) StderrLine: {'line': b'\x1b[0m\n'}
+[12.462300] (simplemap) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:18 (add_executable):\n'}
+[12.462552] (simplemap) StderrLine: {'line': b'  No SOURCES given to target: simple_map_node\n'}
+[12.462728] (simplemap) StderrLine: {'line': b'\n'}
+[12.462871] (simplemap) StderrLine: {'line': b'\x1b[0m\n'}
+[12.463044] (simplemap) StderrLine: {'line': b'\x1b[0mCMake Generate step failed.  Build files cannot be regenerated correctly.\x1b[0m\n'}
+[12.472322] (simplemap) StderrLine: {'line': b'gmake: *** [Makefile:226: cmake_check_build_system] Error 1\n'}
+[12.475317] (simplemap) CommandEnded: {'returncode': 2}
+[12.554778] (-) TimerEvent: {}
+[12.598806] (simplemap) JobEnded: {'identifier': 'simplemap', 'rc': 2}
+[12.610121] (-) EventReactorShutdown: {}

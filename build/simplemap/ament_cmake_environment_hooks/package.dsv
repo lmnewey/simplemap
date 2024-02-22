@@ -1,0 +1,4 @@
+source;share/simplemap/local_setup.bash
+source;share/simplemap/local_setup.dsv
+source;share/simplemap/local_setup.sh
+source;share/simplemap/local_setup.zsh

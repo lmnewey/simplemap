@@ -1,0 +1,164 @@
+[0.000000] (-) TimerEvent: {}
+[0.001063] (simplemap) JobQueued: {'identifier': 'simplemap', 'dependencies': OrderedDict()}
+[0.001212] (simplemap) JobStarted: {'identifier': 'simplemap'}
+[0.069674] (simplemap) JobProgress: {'identifier': 'simplemap', 'progress': 'cmake'}
+[0.071543] (simplemap) JobProgress: {'identifier': 'simplemap', 'progress': 'build'}
+[0.071654] (simplemap) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/luke/tmp/simplemap/build/simplemap', '--', '-j12', '-l12'], 'cwd': '/home/luke/tmp/simplemap/build/simplemap', 'env': OrderedDict([('USER', 'luke'), ('GIT_ASKPASS', '/home/luke/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('WT_PROFILE_ID', '{51855cb2-8cce-5362-8f54-464b92b32386}'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/luke'), ('TERM_PROGRAM_VERSION', '1.85.1'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-c6c63665-d0f5-4158-ab4a-6a93a2313b13.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/luke/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/luke/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/node'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WSL_DISTRO_NAME', 'Ubuntu'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'luke'), ('NAME', 'Code'), ('WSL_INTEROP', '/run/WSL/21257_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/luke/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/bin/remote-cli:/home/luke/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2/bin:/mnt/c/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2/libnvvp:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2023.2.2/:/mnt/c/Users/lmnew/.cargo/bin:/mnt/c/Users/lmnew/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/lmnew/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Espressif/tools/xtensa-esp32-elf-clang/esp-14.0.0-20220415-x86_64-pc-windows-msvc/bin/:/mnt/c/Users/lmnew/AppData/Local/Programs/jaguar:/mnt/c/Users/lmnew/.dotnet/tools:/snap/bin'), ('WT_SESSION', '3347ec39-a4d2-4b9c-b1f9-c4b65e629808'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-5e47345b95.sock'), ('TERM_PROGRAM', 'vscode'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/luke/tmp/simplemap/build/simplemap'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', 'ELECTRON_RUN_AS_NODE/w:WT_SESSION:WT_PROFILE_ID:'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.099476] (-) TimerEvent: {}
+[0.103400] (simplemap) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.7 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.199699] (-) TimerEvent: {}
+[0.299833] (simplemap) StdoutLine: {'line': b'-- Found rclcpp: 16.0.8 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.300087] (-) TimerEvent: {}
+[0.400450] (-) TimerEvent: {}
+[0.500903] (-) TimerEvent: {}
+[0.601355] (-) TimerEvent: {}
+[0.613037] (simplemap) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.616433] (simplemap) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.625342] (simplemap) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.640579] (simplemap) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.661569] (simplemap) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.701550] (-) TimerEvent: {}
+[0.741262] (simplemap) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.742866] (simplemap) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.6 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.801712] (-) TimerEvent: {}
+[0.902217] (-) TimerEvent: {}
+[1.002685] (-) TimerEvent: {}
+[1.103136] (-) TimerEvent: {}
+[1.203589] (-) TimerEvent: {}
+[1.304070] (-) TimerEvent: {}
+[1.404580] (-) TimerEvent: {}
+[1.505044] (-) TimerEvent: {}
+[1.605515] (-) TimerEvent: {}
+[1.705953] (-) TimerEvent: {}
+[1.806395] (-) TimerEvent: {}
+[1.906832] (-) TimerEvent: {}
+[2.007264] (-) TimerEvent: {}
+[2.108086] (-) TimerEvent: {}
+[2.208528] (-) TimerEvent: {}
+[2.308918] (-) TimerEvent: {}
+[2.409300] (-) TimerEvent: {}
+[2.509774] (-) TimerEvent: {}
+[2.610275] (-) TimerEvent: {}
+[2.710774] (-) TimerEvent: {}
+[2.811242] (-) TimerEvent: {}
+[2.911747] (-) TimerEvent: {}
+[3.012152] (-) TimerEvent: {}
+[3.112832] (-) TimerEvent: {}
+[3.213310] (-) TimerEvent: {}
+[3.313794] (-) TimerEvent: {}
+[3.414335] (-) TimerEvent: {}
+[3.514959] (-) TimerEvent: {}
+[3.615501] (-) TimerEvent: {}
+[3.715971] (-) TimerEvent: {}
+[3.816427] (-) TimerEvent: {}
+[3.916882] (-) TimerEvent: {}
+[4.017358] (-) TimerEvent: {}
+[4.117946] (-) TimerEvent: {}
+[4.218439] (-) TimerEvent: {}
+[4.318963] (-) TimerEvent: {}
+[4.419409] (-) TimerEvent: {}
+[4.519967] (-) TimerEvent: {}
+[4.620465] (-) TimerEvent: {}
+[4.720910] (-) TimerEvent: {}
+[4.821401] (-) TimerEvent: {}
+[4.921867] (-) TimerEvent: {}
+[5.022332] (-) TimerEvent: {}
+[5.122816] (-) TimerEvent: {}
+[5.223293] (-) TimerEvent: {}
+[5.323773] (-) TimerEvent: {}
+[5.424228] (-) TimerEvent: {}
+[5.525066] (-) TimerEvent: {}
+[5.625556] (-) TimerEvent: {}
+[5.726008] (-) TimerEvent: {}
+[5.826452] (-) TimerEvent: {}
+[5.926922] (-) TimerEvent: {}
+[6.027412] (-) TimerEvent: {}
+[6.127857] (-) TimerEvent: {}
+[6.228339] (-) TimerEvent: {}
+[6.328812] (-) TimerEvent: {}
+[6.429262] (-) TimerEvent: {}
+[6.529807] (-) TimerEvent: {}
+[6.630299] (-) TimerEvent: {}
+[6.730789] (-) TimerEvent: {}
+[6.831272] (-) TimerEvent: {}
+[6.931796] (-) TimerEvent: {}
+[7.032251] (-) TimerEvent: {}
+[7.132698] (-) TimerEvent: {}
+[7.233149] (-) TimerEvent: {}
+[7.333584] (-) TimerEvent: {}
+[7.434107] (-) TimerEvent: {}
+[7.534530] (-) TimerEvent: {}
+[7.634968] (-) TimerEvent: {}
+[7.735393] (-) TimerEvent: {}
+[7.835930] (-) TimerEvent: {}
+[7.936380] (-) TimerEvent: {}
+[8.036842] (-) TimerEvent: {}
+[8.137312] (-) TimerEvent: {}
+[8.237797] (-) TimerEvent: {}
+[8.338236] (-) TimerEvent: {}
+[8.438646] (-) TimerEvent: {}
+[8.539079] (-) TimerEvent: {}
+[8.639531] (-) TimerEvent: {}
+[8.739971] (-) TimerEvent: {}
+[8.840479] (-) TimerEvent: {}
+[8.940979] (-) TimerEvent: {}
+[9.041480] (-) TimerEvent: {}
+[9.142262] (-) TimerEvent: {}
+[9.242696] (-) TimerEvent: {}
+[9.343132] (-) TimerEvent: {}
+[9.443586] (-) TimerEvent: {}
+[9.544123] (-) TimerEvent: {}
+[9.644569] (-) TimerEvent: {}
+[9.745033] (-) TimerEvent: {}
+[9.845485] (-) TimerEvent: {}
+[9.945901] (-) TimerEvent: {}
+[10.046385] (-) TimerEvent: {}
+[10.146930] (-) TimerEvent: {}
+[10.247377] (-) TimerEvent: {}
+[10.347842] (-) TimerEvent: {}
+[10.448269] (-) TimerEvent: {}
+[10.548721] (-) TimerEvent: {}
+[10.649179] (-) TimerEvent: {}
+[10.749673] (-) TimerEvent: {}
+[10.850119] (-) TimerEvent: {}
+[10.950527] (-) TimerEvent: {}
+[11.050952] (-) TimerEvent: {}
+[11.151407] (-) TimerEvent: {}
+[11.251853] (-) TimerEvent: {}
+[11.276714] (simplemap) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[11.352042] (-) TimerEvent: {}
+[11.452522] (-) TimerEvent: {}
+[11.500383] (simplemap) StdoutLine: {'line': b'-- Found nav_msgs: 4.2.3 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[11.552683] (-) TimerEvent: {}
+[11.653113] (-) TimerEvent: {}
+[11.676357] (simplemap) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.10 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[11.753284] (-) TimerEvent: {}
+[11.774734] (simplemap) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[11.775225] (simplemap) StdoutLine: {'line': b'-- Configured cppcheck include dirs: \n'}
+[11.775358] (simplemap) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[11.778601] (simplemap) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[11.782429] (simplemap) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[11.784620] (simplemap) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[11.799061] (simplemap) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[11.799318] (simplemap) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[11.801179] (simplemap) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[11.802110] (simplemap) StdoutLine: {'line': b'-- Configuring done\n'}
+[11.817379] (simplemap) StdoutLine: {'line': b'-- Generating done\n'}
+[11.819435] (simplemap) StdoutLine: {'line': b'-- Build files have been written to: /home/luke/tmp/simplemap/build/simplemap\n'}
+[11.853470] (-) TimerEvent: {}
+[11.859557] (simplemap) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/simple_map_node.dir/src/simple_map_node.cpp.o\x1b[0m\n'}
+[11.953648] (-) TimerEvent: {}
+[12.054154] (-) TimerEvent: {}
+[12.154730] (-) TimerEvent: {}
+[12.255164] (-) TimerEvent: {}
+[12.292714] (simplemap) StderrLine: {'line': b'\x1b[01m\x1b[K/home/luke/tmp/simplemap/src/simple_map_node.cpp:6:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kfatal error: \x1b[m\x1b[Knlohmann/json.hpp: No such file or directory\n'}
+[12.292960] (simplemap) StderrLine: {'line': b'    6 | #include \x1b[01;31m\x1b[K<nlohmann/json.hpp>\x1b[m\x1b[K\n'}
+[12.293051] (simplemap) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[12.293130] (simplemap) StderrLine: {'line': b'compilation terminated.\n'}
+[12.296013] (simplemap) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/simple_map_node.dir/build.make:76: CMakeFiles/simple_map_node.dir/src/simple_map_node.cpp.o] Error 1\n'}
+[12.296348] (simplemap) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/simple_map_node.dir/all] Error 2\n'}
+[12.296647] (simplemap) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[12.299117] (simplemap) CommandEnded: {'returncode': 2}
+[12.355603] (-) TimerEvent: {}
+[12.413918] (simplemap) JobEnded: {'identifier': 'simplemap', 'rc': 2}
+[12.424795] (-) EventReactorShutdown: {}
