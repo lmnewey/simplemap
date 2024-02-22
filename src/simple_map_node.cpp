@@ -3,11 +3,13 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
-#include <nlohmann/json.hpp>
+#include "json/json.h" // Include jsoncpp
+
 #include <chrono>
 #include <std_msgs/msg/string.hpp>
+#include "geometry_msgs/msg/point.hpp"
 
-using json = nlohmann::json;
+//using Json;
 
 // Define a struct to represent a map node
 struct MapNode {
@@ -18,27 +20,35 @@ struct MapNode {
     std::chrono::system_clock::time_point witness_time; // time when the obstacle was witnessed
     float decay_time;      // decay time for observed obstacles
     // Add more fields as needed
+     // Constructor
+    MapNode(){}
 
-    // Serialize MapNode to JSON
-    void to_json(json& j) const {
-        j = json{{"x", x}, {"y", y}, {"occupied_static", occupied_static},
-                 {"occupied_observed", occupied_observed}, {"witness_time", witness_time}, {"decay_time", decay_time}};
+ // Serialize MapNode to JSON
+    void to_json(Json::Value& j) const {
+        j["x"] = x;
+        j["y"] = y;
+        j["occupied_static"] = occupied_static;
+        j["occupied_observed"] = occupied_observed;
+        j["witness_time"] = std::chrono::system_clock::to_time_t(witness_time);
+        j["decay_time"] = decay_time;
     }
 
     // Deserialize MapNode from JSON
-    void from_json(const json& j) {
-        j.at("x").get_to(x);
-        j.at("y").get_to(y);
-        j.at("occupied_static").get_to(occupied_static);
-        j.at("occupied_observed").get_to(occupied_observed);
-        j.at("witness_time").get_to(witness_time);
-        j.at("decay_time").get_to(decay_time);
+    void from_json(const Json::Value& j) {
+        x = j["x"].asFloat();
+        y = j["y"].asFloat();
+        occupied_static = j["occupied_static"].asFloat();
+        occupied_observed = j["occupied_observed"].asFloat();
+        witness_time = std::chrono::system_clock::from_time_t(j["witness_time"].asInt());
+        decay_time = j["decay_time"].asFloat();
     }
 };
 
 class SimpleMapPublisher : public rclcpp::Node {
 public:
-    SimpleMapPublisher() : Node("simple_map_publisher") {
+    std::vector<std::vector<MapNode>> map_;
+    //std::vector<MapNode> map_;
+    SimpleMapPublisher(const rclcpp::NodeOptions& options) : Node("simple_map_publisher", options) {
         // Define map parameters
         map_resolution_ = 0.1;   // meters per cell
         map_width_ = 200;        // total cells in x direction
@@ -58,9 +68,10 @@ public:
         // Create a publisher for the cost map
         cost_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("cost_map", 10);
 
-        // Subscribe to the "obstacle" topic to receive witnessed obstacles
-        obstacle_subscription_ = this->create_subscription<your_package::msg::Obstacle>(
+         // Subscribe to the "obstacle" topic to receive witnessed obstacles
+        obstacle_subscription_ = this->create_subscription<geometry_msgs::msg::Point>(
             "obstacle", 10, std::bind(&SimpleMapPublisher::obstacle_callback, this, std::placeholders::_1));
+
 
         // Subscribe to the "map_node_commands" topic to receive commands for map node
         map_node_commands_subscription_ = this->create_subscription<std_msgs::msg::String>(
@@ -76,17 +87,26 @@ public:
 private:
     void initialize_map() {
         // Resize the map vector
-        map_.resize(map_width_ * map_height_);
+   map_.resize(map_width_);
 
-        // Initialize each map node
-        for (int i = 0; i < map_width_; ++i) {
-            for (int j = 0; j < map_height_; ++j) {
-                float x = map_origin_x_ + i * map_resolution_;
-                float y = map_origin_y_ + j * map_resolution_;
-                map_[i * map_width_ + j] = {x, y, 0.0, 0.0, std::chrono::system_clock::now(), decay_rate_}; // Initialize all occupancies to 0.0 and decay time to current time
-                // You can initialize other data fields here
-            }
+    // Initialize each map node
+    for (int i = 0; i < map_width_; ++i) {
+        // Resize the inner vector
+        map_[i].resize(map_height_);
+
+        for (int j = 0; j < map_height_; ++j) {
+            float x = map_origin_x_ + i * map_resolution_;
+            float y = map_origin_y_ + j * map_resolution_;
+
+            // Access the MapNode at (i, j) and initialize its properties
+            map_[i][j].x = x;
+            map_[i][j].y = y;
+            map_[i][j].occupied_static = 0.0;
+            map_[i][j].occupied_observed = 0.0;
+            map_[i][j].decay_time = decay_rate_;
+            map_[i][j].witness_time = std::chrono::system_clock::now();
         }
+    }
     }
 
     void load_map() {
@@ -96,16 +116,18 @@ private:
     //if (/* check if map file argument is provided */) {
     //    map_file = /* get map file argument */;
     //}
-
     std::ifstream file(map_file);
     if (file.is_open()) {
         // Read map data from file and update the map
-        json j;
+        Json::Value root;
         try {
-            file >> j;
+            file >> root;
             for (int i = 0; i < map_width_; ++i) {
                 for (int j = 0; j < map_height_; ++j) {
-                    j.at(std::to_string(i) + "_" + std::to_string(j)).get_to(map_[i * map_width_ + j]);
+                    Json::Value mapNodeJson = root[std::to_string(i) + "_" + std::to_string(j)];
+                    MapNode mapNode;
+                    mapNode.from_json(mapNodeJson);
+                    map_[i][j] = mapNode;
                 }
             }
             RCLCPP_INFO(this->get_logger(), "Map loaded from file: %s", map_file.c_str());
@@ -119,18 +141,21 @@ private:
 
 void save_map() {
     // Save the map to a file
+    // Save the map to a file
     std::string map_file = "default_map.json"; // Default map file
     // Save map data to file
-    json j;
+    Json::Value root;
     for (int i = 0; i < map_width_; ++i) {
         for (int j = 0; j < map_height_; ++j) {
-            j[std::to_string(i) + "_" + std::to_string(j)] = map_[i * map_width_ + j];
+            Json::Value mapNodeJson;
+            map_[i][j].to_json(mapNodeJson);
+            root[std::to_string(i) + "_" + std::to_string(j)] = mapNodeJson;
         }
     }
     std::ofstream file(map_file);
     if (file.is_open()) {
         try {
-            file << j.dump(4); // Pretty print with indentation of 4 spaces
+            file << root;
             file.close();
             RCLCPP_INFO(this->get_logger(), "Map saved to file: %s", map_file.c_str());
         } catch (const std::exception& e) {
@@ -141,19 +166,28 @@ void save_map() {
     }
 }
 
-    void obstacle_callback(const your_package::msg::Obstacle::SharedPtr msg) {
+
+    void obstacle_callback(const geometry_msgs::msg::Point::SharedPtr msg) {
+    if (msg) {
         // Update map nodes with observed obstacles
         auto current_time = std::chrono::system_clock::now();
-        for (const auto& obstacle : msg->obstacles) {
-            int index = static_cast<int>((obstacle.x - map_origin_x_) / map_resolution_) * map_width_ +
-                        static_cast<int>((obstacle.y - map_origin_y_) / map_resolution_);
-            if (index >= 0 && index < map_width_ * map_height_) {
-                // Update observed occupancy probability
-                map_[index].occupied_observed = 1.0; // Set observed occupancy to 1.0 (fully occupied)
-                map_[index].witness_time = current_time; // Update witness time
-            }
+        // Extract x, y, and z coordinates from the message
+        float x = msg->x;
+        float y = msg->y;
+        float z = msg->z;
+        // Calculate index in the map
+        int index = static_cast<int>((x - map_origin_x_) / map_resolution_) * map_width_ +
+                    static_cast<int>((y - map_origin_y_) / map_resolution_);
+        // Check if the index is within bounds of the map
+        if (index >= 0 && index < map_width_ * map_height_) {
+            // Update observed occupancy probability
+            map_[index / map_width_][index % map_width_].occupied_observed = 1.0; // Set observed occupancy to 1.0 (fully occupied)
+            map_[index / map_width_][index % map_width_].witness_time = current_time; // Update witness time
         }
+    } else {
+        // Handle case when msg is null
     }
+}
 
     void map_node_commands_callback(const std_msgs::msg::String::SharedPtr msg) {
         // Process commands for map node
@@ -169,11 +203,13 @@ void save_map() {
     void publish_maps() {
         // Remove items that have passed the decay time
         auto current_time = std::chrono::system_clock::now();
-        for (auto& node : map_) {
-            if (std::chrono::duration_cast<std::chrono::seconds>(current_time - node.witness_time).count() > node.decay_time) {
-                // Reset observed occupancy and witness time
-                node.occupied_observed = 0.0;
-                node.witness_time = current_time;
+        for (auto& row : map_) {
+            for (auto& node : row) {
+                if (std::chrono::duration_cast<std::chrono::seconds>(current_time - node.witness_time).count() > node.decay_time) {
+                    // Reset observed occupancy and witness time
+                    node.occupied_observed = 0.0;
+                    node.witness_time = current_time;
+                }
             }
         }
 
@@ -195,15 +231,15 @@ void save_map() {
         // Populate the occupancy grid map data
         occupancy_map_msg.data.resize(map_width_ * map_height_);
         for (int i = 0; i < map_width_; ++i) {
-            for (int j = 0; j < map_height_; ++j) {
-                // Convert map node data to occupancy grid data (for example, convert float occupancy to int)
-                // For simplicity, let's assume occupancy is between 0 and 100
-                int occupancy = static_cast<int>((map_[i * map_width_ + j].occupied_static +
-                                                   map_[i * map_width_ + j].occupied_observed) * 100);
-                // Clamp occupancy values to be within [0, 100]
-                occupancy = std::max(0, std::min(100, occupancy));
-                occupancy_map_msg.data[i * map_width_ + j] = occupancy;
-            }
+            // for (int j = 0; j < map_height_; ++j) {
+            //     // Convert map node data to occupancy grid data (for example, convert float occupancy to int)
+            //     // For simplicity, let's assume occupancy is between 0 and 100
+            //     int occupancy = static_cast<int>((map_[i * map_width_ + j].occupied_static +
+            //                                        map_[i * map_width_ + j].occupied_observed) * 100);
+            //     // Clamp occupancy values to be within [0, 100]
+            //     occupancy = std::max(0, std::min(100, occupancy));
+            //     occupancy_map_msg.data[i * map_width_ + j] = occupancy;
+            // }
         }
 
         // Publish the occupancy grid map
@@ -214,11 +250,11 @@ void save_map() {
         // Populate the cost map data based on occupancy probability (dummy example)
         for (int i = 0; i < map_width_; ++i) {
             for (int j = 0; j < map_height_; ++j) {
-                if (map_[i * map_width_ + j].occupied_static > 0.5 || map_[i * map_width_ + j].occupied_observed > 0.5) {
-                    cost_map_msg.data[i * map_width_ + j] = 100; // occupied space
-                } else {
-                    cost_map_msg.data[i * map_width_ + j] = 0; // free space
-                }
+                // if (map_[i * map_width_ + j].occupied_static > 0.5 || map_[i * map_width_ + j].occupied_observed > 0.5) {
+                //     cost_map_msg.data[i * map_width_ + j] = 100; // occupied space
+                // } else {
+                //     cost_map_msg.data[i * map_width_ + j] = 0; // free space
+                // }
             }
         }
 
@@ -234,12 +270,12 @@ void save_map() {
     float map_origin_y_;
 
     // Vector to store map nodes
-    std::vector<MapNode> map_;
+    //std::vector<MapNode> map_;
 
     // ROS publishers, subscriptions, and timer
     rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr occupancy_publisher_;
     rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr cost_publisher_;
-    rclcpp::Subscription<your_package::msg::Obstacle>::SharedPtr obstacle_subscription_;
+    rclcpp::Subscription<geometry_msgs::msg::Point>::SharedPtr obstacle_subscription_;    
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr map_node_commands_subscription_;
     rclcpp::TimerBase::SharedPtr timer_;
 
@@ -249,7 +285,8 @@ void save_map() {
 
 int main(int argc, char** argv) {
     rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<SimpleMapPublisher>());
+    //rclcpp::spin(std::std::make_shared<SimpleMapPublisher>());
+    rclcpp::spin(std::make_shared<SimpleMapPublisher>(rclcpp::NodeOptions()));
     rclcpp::shutdown();
     return 0;
 }

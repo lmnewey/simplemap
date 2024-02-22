@@ -12,12 +12,25 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+
+
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
 
 add_executable(simple_map_node src/simple_map_node.cpp)
+
+target_include_directories(simple_map_node
+    PUBLIC    
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/jsoncpp/include
+
+    
+)
+
+
 ament_target_dependencies(
   simple_map_node
   rclcpp
@@ -25,8 +38,7 @@ ament_target_dependencies(
   std_msgs
 )
 
-target_link_libraries(simple_map_node ${ament_LIBRARIES})
-
+target_link_libraries(simple_map_node ${ament_LIBRARIES} ${nav_msgs_LIBRARIES} ${std_msgs_LIBRARIES} jsoncpp)
 install(TARGETS
   simple_map_node
   DESTINATION lib/${PROJECT_NAME}

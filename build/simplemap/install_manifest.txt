@@ -1,3 +1,4 @@
+/home/luke/tmp/simplemap/install/simplemap/lib/simplemap/simple_map_node
 /home/luke/tmp/simplemap/install/simplemap/share/ament_index/resource_index/package_run_dependencies/simplemap
 /home/luke/tmp/simplemap/install/simplemap/share/ament_index/resource_index/parent_prefix_path/simplemap
 /home/luke/tmp/simplemap/install/simplemap/share/simplemap/environment/ament_prefix_path.sh
