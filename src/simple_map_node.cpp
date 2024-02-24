@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include "json/json.h" // Include jsoncpp
-
+#include <rclcpp/qos.hpp>
 #include <chrono>
 #include <std_msgs/msg/string.hpp>
 #include "geometry_msgs/msg/point.hpp"
@@ -46,6 +46,90 @@ struct MapNode {
 
 class SimpleMapPublisher : public rclcpp::Node {
 public:
+void publish_maps() {
+         rclcpp::Rate loop_rate(1); 
+        // Remove items that have passed the decay time
+        auto current_time = std::chrono::system_clock::now();
+        for (auto& row : map_) {
+            for (auto& node : row) {
+                if (std::chrono::duration_cast<std::chrono::seconds>(current_time - node.witness_time).count() > node.decay_time) {
+                    // Reset observed occupancy and witness time
+                    node.occupied_observed = 0.0;
+                    node.witness_time = current_time;
+                }
+            }
+        }
+
+        // Create and populate the occupancy grid map message
+        nav_msgs::msg::OccupancyGrid occupancy_map_msg;
+        occupancy_map_msg.header.stamp = this->now();
+        occupancy_map_msg.header.frame_id = "map";
+        occupancy_map_msg.info.resolution = map_resolution_;
+        occupancy_map_msg.info.width = map_width_;
+        occupancy_map_msg.info.height = map_height_;
+        occupancy_map_msg.info.origin.position.x = map_origin_x_;
+        occupancy_map_msg.info.origin.position.y = map_origin_y_;
+        occupancy_map_msg.info.origin.position.z = 0.0;
+        occupancy_map_msg.info.origin.orientation.x = 0.0;
+        occupancy_map_msg.info.origin.orientation.y = 0.0;
+        occupancy_map_msg.info.origin.orientation.z = 0.0;
+        occupancy_map_msg.info.origin.orientation.w = 1.0;
+
+        // Populate the occupancy grid map data
+        occupancy_map_msg.data.resize(map_width_ * map_height_);
+        for (int i = 0; i < map_width_; ++i) {
+            // for (int j = 0; j < map_height_; ++j) {
+            //     // Convert map node data to occupancy grid data (for example, convert float occupancy to int)
+            //     // For simplicity, let's assume occupancy is between 0 and 100
+            //     int occupancy = static_cast<int>((map_[i * map_width_ + j].occupied_static +
+            //                                        map_[i * map_width_ + j].occupied_observed) * 100);
+            //     // Clamp occupancy values to be within [0, 100]
+            //     occupancy = std::max(0, std::min(100, occupancy));
+            //     occupancy_map_msg.data[i * map_width_ + j] = occupancy;
+            // }
+        }
+
+        
+        occupancy_publisher_->publish(occupancy_map_msg);
+
+        // Create and populate the cost map message
+        nav_msgs::msg::OccupancyGrid cost_map_msg = occupancy_map_msg; // Copy occupancy grid metadata
+        // Populate the cost map data based on occupancy probability (dummy example)
+        for (int i = 0; i < map_width_; ++i) {
+            for (int j = 0; j < map_height_; ++j) {
+                // if (map_[i * map_width_ + j].occupied_static > 0.5 || map_[i * map_width_ + j].occupied_observed > 0.5) {
+                //     cost_map_msg.data[i * map_width_ + j] = 100; // occupied space
+                // } else {
+                //     cost_map_msg.data[i * map_width_ + j] = 0; // free space
+                // }
+            }
+        }
+
+        // Publish the cost map
+        cost_publisher_->publish(cost_map_msg);
+
+        // while (rclcpp::ok()) {
+        //          // Remove items that have passed the decay time
+        //     auto current_time = std::chrono::system_clock::now();
+        //     for (auto& row : map_) {
+        //         for (auto& node : row) {
+        //             if (std::chrono::duration_cast<std::chrono::seconds>(current_time - node.witness_time).count() > node.decay_time) {
+        //                 // Reset observed occupancy and witness time
+        //                 node.occupied_observed = 0.0;
+        //                 node.witness_time = current_time;
+        //             }
+        //         }
+        //     }
+
+        //             // Publish the occupancy grid map
+        //     //occupancy_publisher_->publish(occupancy_map_msg);
+        //     //cost_publisher_->publish(cost_map_msg);
+
+        //     //rclcpp::spin_some(this->get_node_base_interface());  // Process any callbacks
+        //     //loop_rate.sleep();  // Sleep to maintain loop rate
+        // }
+        RCLCPP_INFO(this->get_logger(), "Published Maps");
+    }
     std::vector<std::vector<MapNode>> map_;
     //std::vector<MapNode> map_;
     SimpleMapPublisher(const rclcpp::NodeOptions& options) : Node("simple_map_publisher", options) {
@@ -62,11 +146,24 @@ public:
         // Initialize the map
         initialize_map();
 
-        // Create a publisher for the occupancy grid map
-        occupancy_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("map", 10);
+        //rclcpp::PublisherOptionsWithAllocator<nav_msgs::msg::OccupancyGrid> occupancy_publisher_options;
+        //rclcpp::PublisherOptionsWithAllocator<nav_msgs::msg::OccupancyGrid> cost_publisher_options;
 
-        // Create a publisher for the cost map
-        cost_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("cost_map", 10);
+        // Customize QoS settings as needed
+        //occupancy_publisher_options.qos_overriding_options = rclcpp::QosOverridingOptions(rclcpp::QosPolicyKind::Depth | rclcpp::QosPolicyKind::Durability); // Example QoS policies to override
+
+        // Publish the occupancy grid map
+        rclcpp::QoS qos(rclcpp::KeepLast(10)); // Keep only the last 10 messages
+        qos.best_effort(); // Set to best effort QoS
+        
+        qos.reliability(rclcpp::ReliabilityPolicy::SystemDefault);
+        
+
+        // // Create a publisher for the occupancy grid map
+        occupancy_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("map", qos);
+
+        // // Create a publisher for the cost map
+        cost_publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("cost_map", qos);
 
          // Subscribe to the "obstacle" topic to receive witnessed obstacles
         obstacle_subscription_ = this->create_subscription<geometry_msgs::msg::Point>(
@@ -200,67 +297,7 @@ void save_map() {
         }
     }
 
-    void publish_maps() {
-        // Remove items that have passed the decay time
-        auto current_time = std::chrono::system_clock::now();
-        for (auto& row : map_) {
-            for (auto& node : row) {
-                if (std::chrono::duration_cast<std::chrono::seconds>(current_time - node.witness_time).count() > node.decay_time) {
-                    // Reset observed occupancy and witness time
-                    node.occupied_observed = 0.0;
-                    node.witness_time = current_time;
-                }
-            }
-        }
-
-        // Create and populate the occupancy grid map message
-        nav_msgs::msg::OccupancyGrid occupancy_map_msg;
-        occupancy_map_msg.header.stamp = this->now();
-        occupancy_map_msg.header.frame_id = "map";
-        occupancy_map_msg.info.resolution = map_resolution_;
-        occupancy_map_msg.info.width = map_width_;
-        occupancy_map_msg.info.height = map_height_;
-        occupancy_map_msg.info.origin.position.x = map_origin_x_;
-        occupancy_map_msg.info.origin.position.y = map_origin_y_;
-        occupancy_map_msg.info.origin.position.z = 0.0;
-        occupancy_map_msg.info.origin.orientation.x = 0.0;
-        occupancy_map_msg.info.origin.orientation.y = 0.0;
-        occupancy_map_msg.info.origin.orientation.z = 0.0;
-        occupancy_map_msg.info.origin.orientation.w = 1.0;
-
-        // Populate the occupancy grid map data
-        occupancy_map_msg.data.resize(map_width_ * map_height_);
-        for (int i = 0; i < map_width_; ++i) {
-            // for (int j = 0; j < map_height_; ++j) {
-            //     // Convert map node data to occupancy grid data (for example, convert float occupancy to int)
-            //     // For simplicity, let's assume occupancy is between 0 and 100
-            //     int occupancy = static_cast<int>((map_[i * map_width_ + j].occupied_static +
-            //                                        map_[i * map_width_ + j].occupied_observed) * 100);
-            //     // Clamp occupancy values to be within [0, 100]
-            //     occupancy = std::max(0, std::min(100, occupancy));
-            //     occupancy_map_msg.data[i * map_width_ + j] = occupancy;
-            // }
-        }
-
-        // Publish the occupancy grid map
-        occupancy_publisher_->publish(occupancy_map_msg);
-
-        // Create and populate the cost map message
-        nav_msgs::msg::OccupancyGrid cost_map_msg = occupancy_map_msg; // Copy occupancy grid metadata
-        // Populate the cost map data based on occupancy probability (dummy example)
-        for (int i = 0; i < map_width_; ++i) {
-            for (int j = 0; j < map_height_; ++j) {
-                // if (map_[i * map_width_ + j].occupied_static > 0.5 || map_[i * map_width_ + j].occupied_observed > 0.5) {
-                //     cost_map_msg.data[i * map_width_ + j] = 100; // occupied space
-                // } else {
-                //     cost_map_msg.data[i * map_width_ + j] = 0; // free space
-                // }
-            }
-        }
-
-        // Publish the cost map
-        cost_publisher_->publish(cost_map_msg);
-    }
+    
 
     // Map parameters
     float map_resolution_;
@@ -285,8 +322,25 @@ void save_map() {
 
 int main(int argc, char** argv) {
     rclcpp::init(argc, argv);
-    //rclcpp::spin(std::std::make_shared<SimpleMapPublisher>());
-    rclcpp::spin(std::make_shared<SimpleMapPublisher>(rclcpp::NodeOptions()));
+    // Create the node with specific options and spin it
+    //rclcpp::spin(std::make_shared<SimpleMapPublisher>(rclcpp::NodeOptions()));
+       // Create the node with specific options
+    auto node = std::make_shared<SimpleMapPublisher>(rclcpp::NodeOptions());
+
+    // Set the rate of publishing maps (e.g., 1 Hz)
+    rclcpp::Rate loop_rate(1);  // 1 Hz
+
+    while (rclcpp::ok()) {
+        // Publish maps
+        node->publish_maps();
+
+        // Spin any callbacks
+        rclcpp::spin_some(node);
+
+        // Sleep to maintain loop rate
+        loop_rate.sleep();
+    }
     rclcpp::shutdown();
+    
     return 0;
 }
